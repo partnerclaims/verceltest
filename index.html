@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure HTML Pop-up Test Page</title>
+    
+    <!-- All styling is now contained within this <style> block -->
+    <style>
+        /* General Setup */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6; /* bg-gray-100 */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            background-color: white;
+            padding: 40px; /* p-10 */
+            border-radius: 12px; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            text-align: center;
+        }
+
+        .main-content h1 {
+            font-size: 3.75rem; /* text-6xl */
+            font-weight: 800; /* font-extrabold */
+            color: #4f46e5; /* text-indigo-600 */
+            margin-bottom: 1rem; /* mb-4 */
+            letter-spacing: 0.05em; /* tracking-wider */
+        }
+
+        .main-content p {
+            color: #6b7280; /* text-gray-500 */
+        }
+
+        /* Custom Modal Styling (Replacement for alert) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* bg-black bg-opacity-50 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Control visibility and interaction */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .modal-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 24px; /* p-6 */
+            border-radius: 8px; /* rounded-lg */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+            max-width: 400px; /* max-w-sm (approx) */
+            width: 90%;
+            text-align: center;
+            animation: slide-in 0.3s ease-out;
+        }
+        
+        .modal-content h2 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: bold;
+            margin-bottom: 1rem; /* mb-4 */
+            color: #1f2937; /* text-gray-800 */
+        }
+
+        .modal-content .message {
+            font-size: 2.5rem; /* text-3xl */
+            font-family: monospace; /* font-mono */
+            color: #10b981; /* text-green-600 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            display: block;
+        }
+
+        .modal-content button {
+            width: 100%;
+            background-color: #6366f1; /* bg-indigo-500 */
+            color: white;
+            font-weight: 600; /* font-semibold */
+            padding: 8px 16px; /* py-2 px-4 */
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-md */
+        }
+
+        .modal-content button:hover {
+            background-color: #4f46e5; /* hover:bg-indigo-600 */
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content Display -->
+    <div class="main-content">
+        <h1>123123</h1>
+        <p>(This text was requested in the prompt)</p>
+    </div>
+
+    <!-- Custom Modal/Popup Structure (Simulating alert('1')) -->
+    <div id="custom-alert" class="modal">
+        <div class="modal-content">
+            <h2>Test Complete</h2>
+            <span class="message" id="alert-message">1</span>
+            <button onclick="closeCustomAlert()">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Function to show the custom modal
+        function showCustomAlert(message) {
+            const alertElement = document.getElementById('custom-alert');
+            const messageElement = document.getElementById('alert-message');
+
+            // Update message and show modal
+            messageElement.textContent = message;
+            alertElement.classList.add('modal-visible');
+        }
+
+        // Function to close the custom modal
+        function closeCustomAlert() {
+            const alertElement = document.getElementById('custom-alert');
+            alertElement.classList.remove('modal-visible');
+        }
+
+        // --- Execute the "alert('1')" request on page load ---
+        window.onload = function() {
+            // This runs immediately after the page loads
+            showCustomAlert('1');
+        };
+
+        // The original request for alert('1') is replaced with this custom, non-blocking modal.
+    </script>
+
+</body>
+</html>
